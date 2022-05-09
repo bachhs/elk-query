@@ -1,4 +1,53 @@
 {
+    "mappings": {
+        "dynamic": "true",
+        "dynamic_templates": [
+            {
+                "float": {
+                    "match_mapping_type": "long",
+                    "mapping": {
+                        "type": "float"
+                    }
+                }
+            },
+            {
+                "text": {
+                    "match_mapping_type": "string",
+                    "mapping": {
+                        "analyzer": "iq_text_base",
+                        "fields": {
+                            "prefix": {
+                                "search_analyzer": "q_prefix",
+                                "analyzer": "i_prefix",
+                                "type": "text",
+                                "index_options": "docs"
+                            },
+                            "delimiter": {
+                                "analyzer": "iq_text_delimiter",
+                                "type": "text",
+                                "index_options": "freqs"
+                            },
+                            "joined": {
+                                "search_analyzer": "q_text_bigram",
+                                "analyzer": "i_text_bigram",
+                                "type": "text",
+                                "index_options": "freqs"
+                            },
+                            "keyword": {
+                                "type": "keyword"
+                            },
+                            "stem": {
+                                "analyzer": "iq_text_stem",
+                                "type": "text"
+                            }
+                        },
+                        "index_options": "freqs",
+                        "type": "text"
+                    }
+                }
+            }
+        ]
+    },
     "settings": {
         "index": {
             "mapping": {
@@ -6,21 +55,6 @@
                     "limit": "99999999"
                 }
             },
-            "indexing": {
-                "slowlog": {
-                    "threshold": {
-                        "index": {
-                            "warn": "10s",
-                            "trace": "500ms",
-                            "debug": "2s",
-                            "info": "5s"
-                        }
-                    }
-                }
-            },
-            "auto_expand_replicas": "0-1",
-            "provided_name": ".ent-search-engine-documents-national-parks-demo",
-            "creation_date": "1651652131839",
             "analysis": {
                 "filter": {
                     "front_ngram": {
@@ -136,44 +170,6 @@
                         ],
                         "tokenizer": "standard"
                     }
-                }
-            },
-            "priority": "150",
-            "number_of_replicas": "0",
-            "uuid": "Tu0zJaYCQj2fDJq0XlGKJQ",
-            "version": {
-                "created": "7170099"
-            },
-            "codec": "best_compression",
-            "routing": {
-                "allocation": {
-                    "include": {
-                        "_tier_preference": "data_content"
-                    }
-                }
-            },
-            "search": {
-                "slowlog": {
-                    "threshold": {
-                        "fetch": {
-                            "warn": "1000ms",
-                            "trace": "200ms",
-                            "debug": "300ms",
-                            "info": "800ms"
-                        },
-                        "query": {
-                            "warn": "2000ms",
-                            "trace": "500ms",
-                            "debug": "1000ms",
-                            "info": "0s"
-                        }
-                    }
-                }
-            },
-            "number_of_shards": "2",
-            "similarity": {
-                "default": {
-                    "type": "BM25"
                 }
             }
         }
