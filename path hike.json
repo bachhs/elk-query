@@ -1,0 +1,310 @@
+{
+    "from": 0,
+    "size": 20,
+    "timeout": "30000ms",
+    "query": {
+        "bool": {
+            "must": [
+                {
+                    "function_score": {
+                        "query": {
+                            "bool": {
+                                "must": [
+                                    {
+                                        "bool": {
+                                            "should": [
+                                                {
+                                                    "multi_match": {
+                                                        "query": "path hike",
+                                                        "fields": [
+                                                            "description^2.4",
+                                                            "description.delimiter^0.96",
+                                                            "description.joined^1.8",
+                                                            "description.prefix^0.24",
+                                                            "description.stem^2.28",
+                                                            "id^1.0",
+                                                            "nps_link^0.7",
+                                                            "nps_link.delimiter^0.28",
+                                                            "nps_link.joined^0.525",
+                                                            "nps_link.prefix^0.07",
+                                                            "nps_link.stem^0.665",
+                                                            "states^2.8",
+                                                            "states.delimiter^1.12",
+                                                            "states.joined^2.1",
+                                                            "states.prefix^0.28",
+                                                            "states.stem^2.66",
+                                                            "title^5.0",
+                                                            "title.delimiter^2.0",
+                                                            "title.joined^3.75",
+                                                            "title.prefix^0.5",
+                                                            "title.stem^4.75",
+                                                            "world_heritage_site^1.0",
+                                                            "world_heritage_site.delimiter^0.4",
+                                                            "world_heritage_site.joined^0.75",
+                                                            "world_heritage_site.prefix^0.1",
+                                                            "world_heritage_site.stem^0.95"
+                                                        ],
+                                                        "type": "cross_fields",
+                                                        "operator": "OR",
+                                                        "slop": 0,
+                                                        "prefix_length": 0,
+                                                        "max_expansions": 50,
+                                                        "minimum_should_match": "1<-1 3<49%",
+                                                        "zero_terms_query": "NONE",
+                                                        "auto_generate_synonyms_phrase_query": true,
+                                                        "fuzzy_transpositions": true,
+                                                        "boost": 1.0
+                                                    }
+                                                },
+                                                {
+                                                    "multi_match": {
+                                                        "query": "path hike",
+                                                        "fields": [
+                                                            "description.stem^0.24",
+                                                            "nps_link.stem^0.07",
+                                                            "states.stem^0.28",
+                                                            "title.stem^0.5",
+                                                            "world_heritage_site.stem^0.1"
+                                                        ],
+                                                        "type": "best_fields",
+                                                        "operator": "OR",
+                                                        "slop": 0,
+                                                        "fuzziness": "AUTO",
+                                                        "prefix_length": 2,
+                                                        "max_expansions": 50,
+                                                        "minimum_should_match": "1<-1 3<49%",
+                                                        "zero_terms_query": "NONE",
+                                                        "auto_generate_synonyms_phrase_query": true,
+                                                        "fuzzy_transpositions": true,
+                                                        "boost": 1.0
+                                                    }
+                                                },
+                                                {
+                                                    "multi_match": {
+                                                        "query": "path trail hike",
+                                                        "fields": [
+                                                            "description^2.4",
+                                                            "description.delimiter^0.96",
+                                                            "description.joined^1.8",
+                                                            "description.prefix^0.24",
+                                                            "description.stem^2.28",
+                                                            "id^1.0",
+                                                            "nps_link^0.7",
+                                                            "nps_link.delimiter^0.28",
+                                                            "nps_link.joined^0.525",
+                                                            "nps_link.prefix^0.07",
+                                                            "nps_link.stem^0.665",
+                                                            "states^2.8",
+                                                            "states.delimiter^1.12",
+                                                            "states.joined^2.1",
+                                                            "states.prefix^0.28",
+                                                            "states.stem^2.66",
+                                                            "title^5.0",
+                                                            "title.delimiter^2.0",
+                                                            "title.joined^3.75",
+                                                            "title.prefix^0.5",
+                                                            "title.stem^4.75",
+                                                            "world_heritage_site^1.0",
+                                                            "world_heritage_site.delimiter^0.4",
+                                                            "world_heritage_site.joined^0.75",
+                                                            "world_heritage_site.prefix^0.1",
+                                                            "world_heritage_site.stem^0.95"
+                                                        ],
+                                                        "type": "cross_fields",
+                                                        "operator": "OR",
+                                                        "slop": 0,
+                                                        "prefix_length": 0,
+                                                        "max_expansions": 50,
+                                                        "zero_terms_query": "NONE",
+                                                        "auto_generate_synonyms_phrase_query": true,
+                                                        "fuzzy_transpositions": true,
+                                                        "boost": 0.75
+                                                    }
+                                                }
+                                            ],
+                                            "adjust_pure_negative": true,
+                                            "boost": 1.0
+                                        }
+                                    }
+                                ],
+                                "should": [
+                                    {
+                                        "multi_match": {
+                                            "query": "path hike",
+                                            "fields": [
+                                                "description.stem^2.28",
+                                                "id^1.0",
+                                                "nps_link.stem^0.665",
+                                                "states.stem^2.66",
+                                                "title.stem^4.75",
+                                                "world_heritage_site.stem^0.95"
+                                            ],
+                                            "type": "phrase",
+                                            "operator": "OR",
+                                            "slop": 5,
+                                            "prefix_length": 0,
+                                            "max_expansions": 50,
+                                            "zero_terms_query": "NONE",
+                                            "auto_generate_synonyms_phrase_query": true,
+                                            "fuzzy_transpositions": true,
+                                            "boost": 6.0
+                                        }
+                                    }
+                                ],
+                                "adjust_pure_negative": true,
+                                "boost": 1.0
+                            }
+                        },
+                        "functions": [
+                            {
+                                "filter": {
+                                    "match_all": {
+                                        "boost": 1.0
+                                    }
+                                },
+                                "script_score": {
+                                    "script": {
+                                        "source": "Math.max(_score + ((1.5 * (doc.containsKey(\"visitors.float\") && !doc[\"visitors.float\"].empty ? doc[\"visitors.float\"].value : 0))) - _score, 0)",
+                                        "lang": "painless"
+                                    }
+                                }
+                            }
+                        ],
+                        "score_mode": "sum",
+                        "boost_mode": "sum",
+                        "max_boost": 3.4028235E38,
+                        "boost": 1.0
+                    }
+                }
+            ],
+            "adjust_pure_negative": true,
+            "boost": 1.0
+        }
+    },
+    "_source": {
+        "includes": [
+            "states",
+            "nps_link",
+            "title",
+            "acres",
+            "location",
+            "description",
+            "date_established",
+            "world_heritage_site",
+            "square_km",
+            "visitors",
+            "external_id"
+        ],
+        "excludes": []
+    },
+    "sort": [
+        {
+            "id": {
+                "order": "desc"
+            }
+        },
+        {
+            "_doc": {
+                "order": "desc"
+            }
+        }
+    ],
+    "aggregations": {
+        "0__visitors": {
+            "meta": {
+                "respond_with_rfc3339_date": null
+            },
+            "terms": {
+                "field": "visitors.float",
+                "size": 30,
+                "min_doc_count": 1,
+                "shard_min_doc_count": 0,
+                "show_term_doc_count_error": false,
+                "order": [
+                    {
+                        "_count": "desc"
+                    },
+                    {
+                        "_key": "asc"
+                    }
+                ]
+            }
+        }
+    },
+    "highlight": {
+        "fragment_size": 300,
+        "number_of_fragments": 1,
+        "type": "plain",
+        "highlight_query": {
+            "multi_match": {
+                "query": "path hike",
+                "fields": [
+                    "description.prefix^1.0",
+                    "description.stem^1.0",
+                    "nps_link.prefix^1.0",
+                    "nps_link.stem^1.0",
+                    "states.prefix^1.0",
+                    "states.stem^1.0",
+                    "title.prefix^1.0",
+                    "title.stem^1.0",
+                    "world_heritage_site.prefix^1.0",
+                    "world_heritage_site.stem^1.0"
+                ],
+                "type": "best_fields",
+                "operator": "OR",
+                "slop": 0,
+                "prefix_length": 0,
+                "max_expansions": 50,
+                "zero_terms_query": "NONE",
+                "auto_generate_synonyms_phrase_query": true,
+                "fuzzy_transpositions": true,
+                "boost": 1.0
+            }
+        },
+        "order": "score",
+        "require_field_match": false,
+        "encoder": "html",
+        "fields": {
+            "states.stem": {
+                "fragment_size": 300,
+                "no_match_size": 300
+            },
+            "states.prefix": {
+                "fragment_size": 300,
+                "no_match_size": 300
+            },
+            "nps_link.stem": {
+                "fragment_size": 300,
+                "no_match_size": 300
+            },
+            "nps_link.prefix": {
+                "fragment_size": 300,
+                "no_match_size": 300
+            },
+            "title.stem": {
+                "fragment_size": 300,
+                "no_match_size": 300
+            },
+            "title.prefix": {
+                "fragment_size": 300,
+                "no_match_size": 300
+            },
+            "description.stem": {
+                "fragment_size": 300,
+                "no_match_size": 300
+            },
+            "description.prefix": {
+                "fragment_size": 300,
+                "no_match_size": 300
+            },
+            "world_heritage_site.stem": {
+                "fragment_size": 300,
+                "no_match_size": 300
+            },
+            "world_heritage_site.prefix": {
+                "fragment_size": 300,
+                "no_match_size": 300
+            }
+        }
+    }
+}

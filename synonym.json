@@ -1,0 +1,38 @@
+{
+    "from": 0,
+    "size": 100,
+    "query": {
+        "bool": {
+            "filter": [
+                {
+                    "terms": {
+                        "engine_id": [
+                            "6272362388e1fc03420504c3"
+                        ],
+                        "boost": 1.0
+                    }
+                }
+            ],
+            "must_not": [
+                {
+                    "terms": {
+                        "engine_id": [
+                            "000000000000000000000000"
+                        ],
+                        "boost": 1.0
+                    }
+                }
+            ],
+            "adjust_pure_negative": true,
+            "boost": 1.0
+        }
+    },
+    "seq_no_primary_term": true,
+    "sort": [
+        {
+            "_doc": {
+                "order": "asc"
+            }
+        }
+    ]
+}

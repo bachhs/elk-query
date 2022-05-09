@@ -1,0 +1,165 @@
+{
+    "from": 0,
+    "size": 20,
+    "timeout": "30000ms",
+    "query": {
+        "bool": {
+            "must": [
+                {
+                    "function_score": {
+                        "query": {
+                            "match_all": {
+                                "boost": 1.0
+                            }
+                        },
+                        "functions": [
+                            {
+                                "filter": {
+                                    "match_all": {
+                                        "boost": 1.0
+                                    }
+                                },
+                                "script_score": {
+                                    "script": {
+                                        "source": "Math.max(_score + ((1.5 * (doc.containsKey(\"visitors.float\") && !doc[\"visitors.float\"].empty ? doc[\"visitors.float\"].value : 0))) - _score, 0)",
+                                        "lang": "painless"
+                                    }
+                                }
+                            }
+                        ],
+                        "score_mode": "sum",
+                        "boost_mode": "sum",
+                        "max_boost": 3.4028235E38,
+                        "boost": 1.0
+                    }
+                }
+            ],
+            "filter": [
+                {
+                    "bool": {
+                        "should": [
+                            {
+                                "terms": {
+                                    "visitors.float": [
+                                        10047
+                                    ],
+                                    "boost": 1.0
+                                }
+                            }
+                        ],
+                        "adjust_pure_negative": true,
+                        "minimum_should_match": "1",
+                        "boost": 1.0
+                    }
+                }
+            ],
+            "adjust_pure_negative": true,
+            "boost": 1.0
+        }
+    },
+    "_source": {
+        "includes": [
+            "states",
+            "nps_link",
+            "title",
+            "acres",
+            "location",
+            "description",
+            "date_established",
+            "world_heritage_site",
+            "square_km",
+            "visitors",
+            "external_id"
+        ],
+        "excludes": []
+    },
+    "sort": [
+        {
+            "id": {
+                "order": "desc"
+            }
+        },
+        {
+            "_doc": {
+                "order": "desc"
+            }
+        }
+    ],
+    "aggregations": {
+        "0__visitors": {
+            "meta": {
+                "respond_with_rfc3339_date": null
+            },
+            "terms": {
+                "field": "visitors.float",
+                "size": 30,
+                "min_doc_count": 1,
+                "shard_min_doc_count": 0,
+                "show_term_doc_count_error": false,
+                "order": [
+                    {
+                        "_count": "desc"
+                    },
+                    {
+                        "_key": "asc"
+                    }
+                ]
+            }
+        }
+    },
+    "highlight": {
+        "fragment_size": 300,
+        "number_of_fragments": 1,
+        "type": "plain",
+        "highlight_query": {
+            "match_all": {
+                "boost": 1.0
+            }
+        },
+        "order": "score",
+        "require_field_match": false,
+        "encoder": "html",
+        "fields": {
+            "states.stem": {
+                "fragment_size": 300,
+                "no_match_size": 300
+            },
+            "states.prefix": {
+                "fragment_size": 300,
+                "no_match_size": 300
+            },
+            "nps_link.stem": {
+                "fragment_size": 300,
+                "no_match_size": 300
+            },
+            "nps_link.prefix": {
+                "fragment_size": 300,
+                "no_match_size": 300
+            },
+            "title.stem": {
+                "fragment_size": 300,
+                "no_match_size": 300
+            },
+            "title.prefix": {
+                "fragment_size": 300,
+                "no_match_size": 300
+            },
+            "description.stem": {
+                "fragment_size": 300,
+                "no_match_size": 300
+            },
+            "description.prefix": {
+                "fragment_size": 300,
+                "no_match_size": 300
+            },
+            "world_heritage_site.stem": {
+                "fragment_size": 300,
+                "no_match_size": 300
+            },
+            "world_heritage_site.prefix": {
+                "fragment_size": 300,
+                "no_match_size": 300
+            }
+        }
+    }
+}
